@@ -17,7 +17,8 @@ val HttpClient = HttpClient {
 
     defaultRequest {
         url {
-            host = "localhost:3000"
+            host = "10.0.2.2"
+            port = 3000
             protocol = URLProtocol.HTTP
         }
     }

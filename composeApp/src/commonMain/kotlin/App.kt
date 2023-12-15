@@ -43,7 +43,13 @@ fun App(countries: List<Country> = countries()) {
     var postingJson: String? by remember { mutableStateOf("") }
     LaunchedEffect(true) {
         val webService = KyohoeWebService(HttpClient)
-        postingJson = webService.getPosting(1).getOrNull()
+        val res = try {
+            webService.getPosting(1)
+        } catch(e: Exception) {
+            e.printStackTrace()
+            null
+        }
+        postingJson = res?.getOrNull()
     }
 
     MaterialTheme {
