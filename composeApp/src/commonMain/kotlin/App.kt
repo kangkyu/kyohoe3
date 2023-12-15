@@ -9,6 +9,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -19,6 +20,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import api.KyohoeWebService
+import data.HttpClient
 import kotlinx.datetime.Clock
 import kotlinx.datetime.IllegalTimeZoneException
 import kotlinx.datetime.LocalTime
@@ -37,6 +40,12 @@ fun countries() = listOf(
 
 @Composable
 fun App(countries: List<Country> = countries()) {
+    var postingJson: String? by remember { mutableStateOf("") }
+    LaunchedEffect(true) {
+        val webService = KyohoeWebService(HttpClient)
+        postingJson = webService.getPosting(1).getOrNull()
+    }
+
     MaterialTheme {
         var showCountries by remember { mutableStateOf(false) }
         var timeAtLocation by remember { mutableStateOf("No location selected") }
@@ -45,7 +54,7 @@ fun App(countries: List<Country> = countries()) {
             modifier = Modifier.padding(20.dp)
         ) {
             Text(
-                timeAtLocation,
+                postingJson.toString(),
                 style = TextStyle(fontSize = 20.sp),
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth()
