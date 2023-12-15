@@ -1,6 +1,6 @@
 package data
 
-import io.ktor.client.HttpClient
+import io.ktor.client.*
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.plugins.logging.Logger

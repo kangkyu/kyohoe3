@@ -44,6 +44,13 @@ kotlin {
             @OptIn(ExperimentalComposeLibrary::class)
             implementation(compose.components.resources)
             implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.1")
+
+            implementation(libs.ktor.client.cio)
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.client.logging)
+            implementation(libs.ktor.serialization.kotlinx.json)
+            implementation(libs.molecule.runtime)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
